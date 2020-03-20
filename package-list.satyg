@@ -1,0 +1,9 @@
+% (name, url, satyrographos name, author)
+
+let list =
+  [
+    (`satysfi-base`,`https://github.com/puripuri2100/satysfi-base`, Some(`base`), `nyuichi`);
+    (`satysfi-zrbase`,`https://github.com/zr-tex8r/satysfi-zrbase`, Some(`zrbase`), `zr-tex8r`);
+    (`satysfi-simple-itemize`,`https://github.com/puripuri2100/satysfi-simple-itemize`, Some(`simple-itemize`), `puripuri2100`);
+    (`satysfi-siunitx`,`https://github.com/puripuri2100/satysfi-siunitx`, Some(`siunitx`), `puripuri2100`);
+  ]

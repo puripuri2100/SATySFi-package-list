@@ -10,7 +10,10 @@ document (|
 |) '<
   +p{SATySFi's packages list}
   +listing{
-    * \href(`all.html`){all}
+    * \href(`all.pdf`){package list(PDF)}
+%    * \href(`all.html`){package list(HTML)}
+%    * \href(`author.pdf`){package list by author(PDF)}
+%    * \href(`author.html`){package list by author(HTML)}
   }
   +p{Repository: \href(`https://github.com/puripuri2100/SATySFi-package-list`){https://github.com/puripuri2100/SATySFi-package-list}}
 >

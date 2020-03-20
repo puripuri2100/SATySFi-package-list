@@ -1,0 +1,27 @@
+@require: list
+
+@require: make-html/stdjahtml
+
+let doc it bt =
+  document (|
+    title = it;
+    author = {\@puripuri2100};
+    style-sheet = `main`;
+  |) (bt)
+
+
+let join i s1 s2 =
+  if i <= 0 then
+    s2
+  else
+    s1 ^ s2
+
+let-block tinfo +make-all lst =
+  lst
+  |> List.map f
+  |> List.fold-lefti join ` `
+
+
+let-block tinfo +make-author lst =
+  ` `
+

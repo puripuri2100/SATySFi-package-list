@@ -1,0 +1,6 @@
+@import: local
+@import: package-list
+doc {all package list}
+  '<
+  +make-all(list);
+>

@@ -1,0 +1,74 @@
+@require: stdja
+
+@require: annot
+@require: vdecoset
+@require: color
+
+@require: base/list-ext
+
+let doc it bt =
+  StdJa.document (|
+    title = it;
+    author = {\@puripuri2100};
+    show-title = true;
+    show-toc = false;
+  |) (bt)
+
+let-block ctx +make-all lst =
+  let f ctx (name,url, satyrographos-name-opt, author) =
+    let check-box-ib =
+      let emoji-ctx =
+        ctx
+        |> set-font Latin (`fonts-noto-emoji:NotoEmoji-Regular`,0.88,0.0)
+      in
+      match satyrographos-name-opt with
+      | None -> read-inline emoji-ctx {☐}
+      | Some(s) -> read-inline emoji-ctx {☑}
+    in
+    let satyrographos-name-ib =
+      match satyrographos-name-opt with
+      | None -> read-inline ctx {None}
+      | Some(s) -> read-inline ctx (s |> embed-string)
+    in
+    let name-ib =
+      name |> embed-string |> read-inline ctx
+    in
+    let author-ib =
+      (`by @` ^ author)
+      |> embed-string
+      |> read-inline ctx
+    in
+    let url-ib =
+      {URL: \href(url)(embed-string url);} |> read-inline ctx
+    in
+    let main-bb =
+      let title-bb =
+        (name-ib ++ inline-skip 10pt ++ author-ib)
+        |> line-break true true ctx
+      in
+      let url-bb =
+        (inline-skip 12pt ++ url-ib)
+        |> line-break true true ctx
+      in
+      let satyrographos-bb =
+        (inline-skip 12pt ++ check-box-ib ++ inline-skip 5pt ++ satyrographos-name-ib)
+        |> line-break true true ctx
+      in
+        title-bb +++ url-bb +++ satyrographos-bb
+    in
+    main-bb
+  in
+  let deco f data =
+    let deco-set = VDecoSet.simple-frame-stroke 0.5pt Color.black in
+    let pads = (5pt,5pt,5pt,5pt) in
+    block-frame-breakable ctx pads deco-set
+      (fun ctx -> f ctx data)
+  in
+  lst
+  |> List.map (deco f)
+  |> List.fold-left (+++) block-nil
+
+
+let-block ctx +make-author lst =
+  block-nil
+
