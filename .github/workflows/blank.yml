@@ -20,8 +20,7 @@ jobs:
           persist-credentials: false
 
       - name: Build
-      - uses: actions/checkout@v2
-      - run: |
+        run: |
           export HOME=/root
           eval $(opam env)
           opam update
