@@ -20,6 +20,7 @@ jobs:
           persist-credentials: false
 
       - name: Build
+      - uses: actions/checkout@v2
       - run: |
           export HOME=/root
           eval $(opam env)
@@ -34,27 +35,4 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: build # The folder the action should deploy.
-
-
-on: pull_request
-jobs:
-  build:
-      runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          version: [0.0.4-dev2020.02.22]
-      container:
-        image: amutake/satysfi:${{ matrix.version }}
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v1
-
-        - name: Build
-        - run: |
-            export HOME=/root
-            eval $(opam env)
-            opam update
-            opam install satysfi-base
-            satyrographos install -library base
-            make build
 
