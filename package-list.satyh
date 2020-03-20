@@ -1,0 +1,4 @@
+let list =
+  [
+    (`base`,`https://github.com/puripuri2100/satysfi-base`, Some(`satysfi-base`))
+  ]
