@@ -1,0 +1,16 @@
+@require: make-html/stdjahtml
+@require: make-html/url
+@require: make-html/itemize
+
+
+document (|
+  title = {SATySFi packages list};
+  author = {puripuri2100};
+  style-sheet = `main`;
+|) '<
+  +p{SATySFi's packages list}
+  +listing{
+    * \href(`all.html`){all}
+  }
+  +p{Repository: \href(`https://github.com/puripuri2100/SATySFi-package-list`){https://github.com/puripuri2100/SATySFi-package-list}}
+>
