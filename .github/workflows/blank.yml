@@ -26,7 +26,8 @@ jobs:
           opam update
           opam install satysfi-base
           opam install satysfi-make-html
-          satyrographos install -library base make-html
+          satyrographos install -library base
+          satyrographos install -library make-html
           make build
 
       - name: Deploy
