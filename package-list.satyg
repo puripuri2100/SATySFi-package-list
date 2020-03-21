@@ -4,14 +4,17 @@ let list =
   [
     (`satysfi-base`,`https://github.com/nyuichi/satysfi-base`, Some(`base`), `nyuichi`);
     (`satysfi-zrbase`,`https://github.com/zr-tex8r/satysfi-zrbase`, Some(`zrbase`), `zr-tex8r`);
+    (`satysfi-zrsatz`,`https://github.com/zr-tex8r/satysfi-zrsatz`, None, `zr-tex8r`);
     (`satysfi-cancel`,`https://github.com/yuhr/satysfi-cancel`, Some(`cancel`), `yuhr`);
     (`SATySFii-uline`,`https://github.com/puripuri2100/SATySFi-uline`, None, `puripuri2100`);
     (`SATySFi-simple-itemize`,`https://github.com/puripuri2100/SATySFi-simple-itemize`, Some(`simple-itemize`), `puripuri2100`);
-    (`SATySFi-siunitx`,`https://github.com/puripuri2100/SATySFi-siunitx`, Some(`siunitx`), `puripuri2100`);
+    (`satysfi-enumitem`,`https://github.com/monaqa/satysfi-enumitem`, Some(`enumitem`), `monaqa`);
     (`SATySFi-debug-show-value`,`https://github.com/puripuri2100/SATySFi-debug-show-value`, Some(`debug-show-value`), `puripuri2100`);
     (`SATySFi-assert-eq`,`https://github.com/puripuri2100/SATySFi-assert-eq`, None, `puripuri2100`);
     (`SATySFi-num-conversion`,`https://github.com/puripuri2100/SATySFi-num-conversion`, Some(`num-conversion`), `puripuri2100`);
     (`SATySFi-code-syntax`,`https://github.com/puripuri2100/SATySFi-code-syntax`, None, `puripuri2100`);
+    (`satysfi-highlight`,`https://github.com/Amaoto17/satysfi-highlight`, None, `Amaoto17`);
+    (`satynx`,`https://github.com/monaqa/satynx`, None, `monaqa`);
     (`make-puzzle`,`https://github.com/puripuri2100/make-puzzle`, None, `puripuri2100`);
     (`SATySFi-language-judge`,`https://github.com/puripuri2100/SATySFi-language-judge`, None, `puripuri2100`);
     (`SATySFi-calendar`,`https://github.com/puripuri2100/SATySFi-calendar`, None, `puripuri2100`);
@@ -19,14 +22,39 @@ let list =
     (`SATySFi-new-cls`,`https://github.com/puripuri2100/SATySFi-new-cls`, None, `puripuri2100`);
     (`musikui.satyh`,`https://github.com/puripuri2100/musikui.satyh`, None, `puripuri2100`);
     (`textcolor.satyh`,`https://github.com/puripuri2100/textcolor.satyh`, None, `puripuri2100`);
+    (`satysfi-easytable`,`https://github.com/monaqa/satysfi-easytable`, Some(`easytable`), `monaqa`);
+    (`satysfi-MkTable`,`https://github.com/takagiy/satysfi-MkTable`, None, `takagiy`);
+    (`versatyle`,`https://github.com/monaqa/versatyle`, None, `monaqa`);
+    (`regexp.satyh`,`https://github.com/hanachin/satysfi-examples/blob/master/regexp.satyh`, None, `hanachin`);
+    (`satysfi-seqsplit`,`https://github.com/takagiy/satysfi-seqsplit`, None, `takagiy`);
+    (`SATySFi-grcnum`,`https://github.com/na4zagin3/SATySFi-grcnum`, Some(`grcnum`), `na4zagin3`);
 
-    (`exdesign`,`https://github.com/puripuri2100/exdesign`, Some(`class-exdesign`), `puripuri2100`);
+    (`cs-thesis`,`https://github.com/gfngfn/cs-thesis`, None, `gfngfn`);
+    (`shinchoku-tairiku.satyh`,`https://github.com/shinchoku-tairiku/shinchoku-tairiku.satyh`, None, `shinchoku-tairiku`);
+    (`ExDesign`,`https://github.com/puripuri2100/exdesign`, Some(`class-exdesign`), `puripuri2100`);
     (`stjarticle`,`https://github.com/puripuri2100/stjarticle`, Some(`class-stjarticle`), `puripuri2100`);
+
+    (`SLyDIFi`,`https://github.com/monaqa/slydifi`, Some(`class-slydifi`), `monaqa`);
+    (`satysfi-steamer`,`https://github.com/konn/satysfi-steamer`, None, `konn`);
+
+
+    (`SATySFi-siunitx`,`https://github.com/puripuri2100/SATySFi-siunitx`, Some(`siunitx`), `puripuri2100`);
+    (`satysfi-matrix`,`https://github.com/nekketsuuu/satysfi-matrix`, Some(`matrix`), `nekketsuuu`);
+    (`satysfi-karnaugh`,`https://github.com/takagiy/satysfi-karnaugh`, Some(`karnaugh`), `takagiy`);
 
     (`SATySFi-make-html`,`https://github.com/puripuri2100/SATySFi-make-html`, Some(`make-html`), `puripuri2100`);
     (`SATySFi-make-markdown`,`https://github.com/puripuri2100/SATySFi-make-markdown`, Some(`make-markdown`), `puripuri2100`);
-    (`SATySFi-make-saty`,`https://github.com/puripuri2100/SATySFi-make-saty`, Some(`make-saty`), `puripuri2100`);
+    (`SATySFi-make-saty`,`https://github.com/puripuri2100/SATySFi-make-saty`, None, `puripuri2100`);
     (`SATySFi-make-latex`,`https://github.com/puripuri2100/SATySFi-make-latex`, None, `puripuri2100`);
 
+    (`SATySFi-fonts-noto-serif`,`https://github.com/zeptometer/SATySFi-fonts-noto-serif`, Some(`fonts-noto-serif`), `zeptometer`);
+    (`SATySFi-fonts-noto-serif-cjk-jp`,`https://github.com/zeptometer/SATySFi-fonts-noto-serif-cjk-jp`, Some(`fonts-noto-serif-cjk-jp`), `zeptometer`);
+    (`SATySFi-fonts-noto-sans`,`https://github.com/zeptometer/SATySFi-fonts-noto-sans`, Some(`fonts-noto-sans`), `zeptometer`);
+    (`SATySFi-fonts-noto-sans-cjk-jp`,`https://github.com/zeptometer/SATySFi-fonts-noto-sans-cjk-jp`, Some(`fonts-noto-sans-cjk-jp`), `zeptometer`);
+    (`SATySFi-fonts-computer-modern-unicode`,`https://github.com/zeptometer/SATySFi-fonts-computer-modern-unicode`, Some(`fonts-computer-modern-unicode`), `zeptometer`);
+    (`SATySFi-fonts-asana-math`,`https://github.com/zeptometer/SATySFi-fonts-fonts-asana-math`, Some(`fonts-fonts-asana-math`), `zeptometer`);
+    (`SATySFi-fonts-dejavu`,`https://github.com/zeptometer/SATySFi-fonts-dejavu`, Some(`fonts-dejavu`), `zeptometer`);
     (`SATySFi-fonts-noto-emoji`,`https://github.com/puripuri2100/SATySFi-fonts-noto-emoji`, Some(`fonts-noto-emoji`), `puripuri2100`);
+    (`SATySFi-fonts-theano`,`https://github.com/na4zagin3/SATySFi-fonts-theano`, Some(`fonts-theano`), `na4zagin3`);
+    (`SATySFi-fonts-geolab`,`https://github.com/na4zagin3/SATySFi-fonts-geolab`, None, `na4zagin3`);
   ]
