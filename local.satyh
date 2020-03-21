@@ -141,7 +141,7 @@ let spirit-author lst =
 
 let-block ctx +make-author lst =
   let ord-lst-size =
-    Ord.make (fun (i1,_,_) (i2,_,_) -> Ord.compare Int.ord i1 i2)
+    Ord.make (fun (i,_,_) (j,_,_)  -> (if i == j then Eq else if i < j then Gt else Lt))
   in
   lst
   |> spirit-author
@@ -167,7 +167,7 @@ let spirit-license lst =
 
 let-block ctx +make-license lst =
   let ord-lst-size =
-    Ord.make (fun (i1,_,_) (i2,_,_) -> Ord.compare Int.ord i1 i2)
+    Ord.make (fun (i,_,_) (j,_,_) -> (if i == j then Eq else if i < j then Gt else Lt))
   in
   lst
   |> spirit-license
