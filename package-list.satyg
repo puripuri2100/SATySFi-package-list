@@ -37,6 +37,7 @@ let list =
     (`SLyDIFi`,`https://github.com/monaqa/slydifi`, Some(`class-slydifi`), `monaqa`);
     (`satysfi-steamer`,`https://github.com/konn/satysfi-steamer`, None, `konn`);
 
+    (`BiByFi`,`https://github.com/namachan10777/BiByFi`, None, `namachan10777`);
 
     (`SATySFi-siunitx`,`https://github.com/puripuri2100/SATySFi-siunitx`, Some(`siunitx`), `puripuri2100`);
     (`satysfi-matrix`,`https://github.com/nekketsuuu/satysfi-matrix`, Some(`matrix`), `nekketsuuu`);
