@@ -1,0 +1,6 @@
+@import: local
+@import: package-list
+doc {package list by license}
+  '<
+  +make-license(list);
+>

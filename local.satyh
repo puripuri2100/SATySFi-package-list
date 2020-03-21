@@ -5,6 +5,9 @@
 @require: color
 
 @require: base/list-ext
+@require: base/ord
+@require: base/int
+@require: base/string
 
 let doc it bt =
   StdJa.document (|
@@ -14,70 +17,163 @@ let doc it bt =
     show-toc = false;
   |) (bt)
 
+let make-data-bb ctx (name,url, satyrographos-name-opt, author, license-opt) =
+  let check-box-ib =
+    let emoji-ctx =
+      ctx
+      |> set-font Latin (`fonts-noto-emoji:NotoEmoji-Regular`,0.88,0.0)
+    in
+    match satyrographos-name-opt with
+    | None -> read-inline emoji-ctx {☐}
+    | Some(s) -> read-inline emoji-ctx {☑}
+  in
+  let satyrographos-name-ib =
+    match satyrographos-name-opt with
+    | None -> read-inline ctx {Satyrographos : None}
+    | Some(s) -> `Satyrographos : `# ^ s |> embed-string |> read-inline ctx
+  in
+  let name-ib =
+    name |> embed-string |> read-inline ctx
+  in
+  let author-ib =
+    (`by @` ^ author)
+    |> embed-string
+    |> read-inline ctx
+  in
+  let url-ib =
+    {URL: \href(url)(embed-string url);} |> read-inline ctx
+  in
+  let license-ib =
+    match license-opt with
+    | None -> {LICENSE : None} |> read-inline ctx
+    | Some(s) -> `LICENSE : `# ^ s |> embed-string |> read-inline ctx
+  in
+  let main-bb =
+    let title-bb =
+      (name-ib ++ inline-skip 10pt ++ author-ib ++ inline-fil)
+      |> line-break true true ctx
+    in
+    let url-bb =
+      (inline-skip 12pt ++ url-ib ++ inline-fil)
+      |> line-break true true ctx
+    in
+    let satyrographos-bb =
+      (inline-skip 12pt ++ satyrographos-name-ib ++ inline-fil)
+      |> line-break true true ctx
+    in
+    let license-bb =
+      (inline-skip 12pt ++ license-ib ++ inline-fil)
+      |> line-break true true ctx
+    in
+      title-bb +++ url-bb +++ license-bb +++ satyrographos-bb
+  in
+  main-bb
+
+let data-deco ctx f data =
+  let deco-set = VDecoSet.simple-frame-stroke 0.5pt Color.black in
+  let pads = (5pt,5pt,5pt,5pt) in
+  block-frame-breakable ctx pads deco-set
+    (fun ctx -> f ctx data)
+
+
 let-block ctx +make-all lst =
-  let f ctx (name,url, satyrographos-name-opt, author, license-opt) =
-    let check-box-ib =
-      let emoji-ctx =
-        ctx
-        |> set-font Latin (`fonts-noto-emoji:NotoEmoji-Regular`,0.88,0.0)
-      in
-      match satyrographos-name-opt with
-      | None -> read-inline emoji-ctx {☐}
-      | Some(s) -> read-inline emoji-ctx {☑}
-    in
-    let satyrographos-name-ib =
-      match satyrographos-name-opt with
-      | None -> read-inline ctx {Satyrographos : None}
-      | Some(s) -> `Satyrographos : `# ^ s |> embed-string |> read-inline ctx
-    in
-    let name-ib =
-      name |> embed-string |> read-inline ctx
-    in
-    let author-ib =
-      (`by @` ^ author)
-      |> embed-string
-      |> read-inline ctx
-    in
-    let url-ib =
-      {URL: \href(url)(embed-string url);} |> read-inline ctx
-    in
-    let license-ib =
-      match license-opt with
-      | None -> {LICENSE : None} |> read-inline ctx
-      | Some(s) -> `LICENSE : `# ^ s |> embed-string |> read-inline ctx
-    in
-    let main-bb =
-      let title-bb =
-        (name-ib ++ inline-skip 10pt ++ author-ib ++ inline-fil)
-        |> line-break true true ctx
-      in
-      let url-bb =
-        (inline-skip 12pt ++ url-ib ++ inline-fil)
-        |> line-break true true ctx
-      in
-      let satyrographos-bb =
-        (inline-skip 12pt ++ satyrographos-name-ib ++ inline-fil)
-        |> line-break true true ctx
-      in
-      let license-bb =
-        (inline-skip 12pt ++ license-ib ++ inline-fil)
-        |> line-break true true ctx
-      in
-        title-bb +++ url-bb +++ license-bb +++ satyrographos-bb
-    in
-    main-bb
-  in
-  let deco f data =
-    let deco-set = VDecoSet.simple-frame-stroke 0.5pt Color.black in
-    let pads = (5pt,5pt,5pt,5pt) in
-    block-frame-breakable ctx pads deco-set
-      (fun ctx -> f ctx data)
-  in
   lst
-  |> List.map (deco f)
+  |> List.map (data-deco ctx make-data-bb)
   |> List.fold-left (+++) block-nil
 
 
-let-block ctx +make-author lst =
-  block-nil
 
+
+let-block ctx +bb bb = bb
+
+
+let to-sec ctx (title, bb-lst) =
+  let main-bb =
+    bb-lst |> List.fold-left (+++) block-nil
+  in
+  let bt = '<+bb(main-bb);> in
+  '<+section(title |> embed-string)<#bt;>> |> read-block ctx
+
+
+let to-sec-opt ctx (title-opt, bb-lst) =
+  let main-bb =
+    bb-lst |> List.fold-left (+++) block-nil
+  in
+  let bt = '<+bb(main-bb);> in
+  match title-opt with
+  | None -> '<+section(`None` |> embed-string)<#bt;>> |> read-block ctx
+  | Some(s) -> '<+section(s |> embed-string)<#bt;>> |> read-block ctx
+
+
+let str-opt-equal o1 o2 =
+  match (o1,o2) with
+  | (None,None) -> true
+  | (Some(s1),Some(s2)) -> String.equal s1 s2
+  | _ -> false
+
+
+let make-title-lst get-f eq-f lst =
+% string list -> (string,string option, string, string option) -> string list
+  let-rec sub t-lst main-lst =
+    match main-lst with
+    | [] -> t-lst
+    | x::xs ->
+      sub (
+        if List.exists (eq-f (get-f x)) t-lst then
+          t-lst
+        else
+          (get-f x) :: t-lst
+      ) xs
+  in
+  sub [] lst
+
+
+let spirit-author lst =
+  let title-lst =
+    make-title-lst (fun (_,_,_,s,_) -> s) String.equal lst
+  in
+    title-lst
+    |> List.map (fun s1 ->
+        (s1,List.partition (fun (_,_,_,s2,_) -> String.equal s1 s2) lst)
+      )
+    |> List.map (fun (title,(lst,_)) -> (title,lst))
+
+
+let-block ctx +make-author lst =
+  let ord-lst-size =
+    Ord.make (fun (i1,_,_) (i2,_,_) -> Ord.compare Int.ord i1 i2)
+  in
+  lst
+  |> spirit-author
+  |> List.map (fun (title,lst) -> (List.length lst, title, lst))
+  |> List.insertsort ord-lst-size
+  |> List.map (fun (_,title,lst) -> (title,lst))
+  |> List.map (fun (title,lst) -> (title,List.map (data-deco ctx make-data-bb) lst))
+  |> List.map (to-sec ctx)
+  |> List.fold-left (+++) block-nil
+
+
+
+let spirit-license lst =
+  let title-lst =
+    make-title-lst (fun (_,_,_,_,o) -> o) str-opt-equal lst
+  in
+    title-lst
+    |> List.map (fun o1 ->
+        (o1,List.partition (fun (_,_,_,_,o2) -> str-opt-equal o1 o2) lst)
+      )
+    |> List.map (fun (title,(lst,_)) -> (title,lst))
+
+
+let-block ctx +make-license lst =
+  let ord-lst-size =
+    Ord.make (fun (i1,_,_) (i2,_,_) -> Ord.compare Int.ord i1 i2)
+  in
+  lst
+  |> spirit-license
+  |> List.map (fun (title,lst) -> (List.length lst, title, lst))
+  |> List.insertsort ord-lst-size
+  |> List.map (fun (_,title,lst) -> (title,lst))
+  |> List.map (fun (title,lst) -> (title,List.map (data-deco ctx make-data-bb) lst))
+  |> List.map (to-sec-opt ctx)
+  |> List.fold-left (+++) block-nil
