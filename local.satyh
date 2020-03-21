@@ -15,7 +15,7 @@ let doc it bt =
   |) (bt)
 
 let-block ctx +make-all lst =
-  let f ctx (name,url, satyrographos-name-opt, author) =
+  let f ctx (name,url, satyrographos-name-opt, author, license-opt) =
     let check-box-ib =
       let emoji-ctx =
         ctx
@@ -27,8 +27,8 @@ let-block ctx +make-all lst =
     in
     let satyrographos-name-ib =
       match satyrographos-name-opt with
-      | None -> read-inline ctx {None}
-      | Some(s) -> read-inline ctx (s |> embed-string)
+      | None -> read-inline ctx {Satyrographos : None}
+      | Some(s) -> `Satyrographos : `# ^ s |> embed-string |> read-inline ctx
     in
     let name-ib =
       name |> embed-string |> read-inline ctx
@@ -41,20 +41,29 @@ let-block ctx +make-all lst =
     let url-ib =
       {URL: \href(url)(embed-string url);} |> read-inline ctx
     in
+    let license-ib =
+      match license-opt with
+      | None -> {LICENSE : None} |> read-inline ctx
+      | Some(s) -> `LICENSE : `# ^ s |> embed-string |> read-inline ctx
+    in
     let main-bb =
       let title-bb =
-        (name-ib ++ inline-skip 10pt ++ author-ib)
+        (name-ib ++ inline-skip 10pt ++ author-ib ++ inline-fil)
         |> line-break true true ctx
       in
       let url-bb =
-        (inline-skip 12pt ++ url-ib)
+        (inline-skip 12pt ++ url-ib ++ inline-fil)
         |> line-break true true ctx
       in
       let satyrographos-bb =
-        (inline-skip 12pt ++ check-box-ib ++ inline-skip 5pt ++ satyrographos-name-ib)
+        (inline-skip 12pt ++ satyrographos-name-ib ++ inline-fil)
         |> line-break true true ctx
       in
-        title-bb +++ url-bb +++ satyrographos-bb
+      let license-bb =
+        (inline-skip 12pt ++ license-ib ++ inline-fil)
+        |> line-break true true ctx
+      in
+        title-bb +++ url-bb +++ license-bb +++ satyrographos-bb
     in
     main-bb
   in
