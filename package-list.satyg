@@ -2,8 +2,31 @@
 
 let list =
   [
-    (`satysfi-base`,`https://github.com/puripuri2100/satysfi-base`, Some(`base`), `nyuichi`);
+    (`satysfi-base`,`https://github.com/nyuichi/satysfi-base`, Some(`base`), `nyuichi`);
     (`satysfi-zrbase`,`https://github.com/zr-tex8r/satysfi-zrbase`, Some(`zrbase`), `zr-tex8r`);
-    (`satysfi-simple-itemize`,`https://github.com/puripuri2100/satysfi-simple-itemize`, Some(`simple-itemize`), `puripuri2100`);
-    (`satysfi-siunitx`,`https://github.com/puripuri2100/satysfi-siunitx`, Some(`siunitx`), `puripuri2100`);
+    (`satysfi-cancel`,`https://github.com/yuhr/satysfi-cancel`, Some(`cancel`), `yuhr`);
+    (`SATySFii-uline`,`https://github.com/puripuri2100/SATySFi-uline`, None, `puripuri2100`);
+    (`SATySFi-simple-itemize`,`https://github.com/puripuri2100/SATySFi-simple-itemize`, Some(`simple-itemize`), `puripuri2100`);
+    (`SATySFi-siunitx`,`https://github.com/puripuri2100/SATySFi-siunitx`, Some(`siunitx`), `puripuri2100`);
+    (`SATySFi-debug-show-value`,`https://github.com/puripuri2100/SATySFi-debug-show-value`, Some(`debug-show-value`), `puripuri2100`);
+    (`SATySFi-assert-eq`,`https://github.com/puripuri2100/SATySFi-assert-eq`, None, `puripuri2100`);
+    (`SATySFi-num-conversion`,`https://github.com/puripuri2100/SATySFi-num-conversion`, Some(`num-conversion`), `puripuri2100`);
+    (`SATySFi-code-syntax`,`https://github.com/puripuri2100/SATySFi-code-syntax`, None, `puripuri2100`);
+    (`make-puzzle`,`https://github.com/puripuri2100/make-puzzle`, None, `puripuri2100`);
+    (`SATySFi-language-judge`,`https://github.com/puripuri2100/SATySFi-language-judge`, None, `puripuri2100`);
+    (`SATySFi-calendar`,`https://github.com/puripuri2100/SATySFi-calendar`, None, `puripuri2100`);
+    (`SATySFi-clock-board`,`https://github.com/puripuri2100/SATySFi-clock-board`, None, `puripuri2100`);
+    (`SATySFi-new-cls`,`https://github.com/puripuri2100/SATySFi-new-cls`, None, `puripuri2100`);
+    (`musikui.satyh`,`https://github.com/puripuri2100/musikui.satyh`, None, `puripuri2100`);
+    (`textcolor.satyh`,`https://github.com/puripuri2100/textcolor.satyh`, None, `puripuri2100`);
+
+    (`exdesign`,`https://github.com/puripuri2100/exdesign`, Some(`class-exdesign`), `puripuri2100`);
+    (`stjarticle`,`https://github.com/puripuri2100/stjarticle`, Some(`class-stjarticle`), `puripuri2100`);
+
+    (`SATySFi-make-html`,`https://github.com/puripuri2100/SATySFi-make-html`, Some(`make-html`), `puripuri2100`);
+    (`SATySFi-make-markdown`,`https://github.com/puripuri2100/SATySFi-make-markdown`, Some(`make-markdown`), `puripuri2100`);
+    (`SATySFi-make-saty`,`https://github.com/puripuri2100/SATySFi-make-saty`, Some(`make-saty`), `puripuri2100`);
+    (`SATySFi-make-latex`,`https://github.com/puripuri2100/SATySFi-make-latex`, None, `puripuri2100`);
+
+    (`SATySFi-fonts-noto-emoji`,`https://github.com/puripuri2100/SATySFi-fonts-noto-emoji`, Some(`fonts-noto-emoji`), `puripuri2100`);
   ]
