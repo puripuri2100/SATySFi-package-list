@@ -11,7 +11,7 @@ let list =
     (`SATySFi-simple-itemize`,`https://github.com/puripuri2100/SATySFi-simple-itemize`, Some(`simple-itemize`), `puripuri2100`, Some(`MIT`));
     (`satysfi-enumitem`,`https://github.com/monaqa/satysfi-enumitem`, Some(`enumitem`), `monaqa`, Some(`MIT`));
     (`SATySFi-debug-show-value`,`https://github.com/puripuri2100/SATySFi-debug-show-value`, Some(`debug-show-value`), `puripuri2100`, Some(`MIT`));
-    (`SATySFi-assert-eq`,`https://github.com/puripuri2100/SATySFi-assert-eq`, None, `puripuri2100`, None);
+    (`SATySFi-assert-eq`,`https://github.com/puripuri2100/SATySFi-assert-eq`, Some(`assert-eq`), `puripuri2100`, None);
     (`SATySFi-num-conversion`,`https://github.com/puripuri2100/SATySFi-num-conversion`, Some(`num-conversion`), `puripuri2100`, Some(`MIT`));
     (`SATySFi-code-syntax`,`https://github.com/puripuri2100/SATySFi-code-syntax`, None, `puripuri2100`, Some(`MIT`));
     (`satysfi-highlight`,`https://github.com/Amaoto17/satysfi-highlight`, None, `Amaoto17`, Some(`BSD-3-Clause`));
