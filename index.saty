@@ -11,11 +11,11 @@ document (|
   +p{SATySFi's packages list}
   +listing{
     * \href(`all.pdf`){package list(PDF)}
-%    * \href(`all.html`){package list(HTML)}
+    * \href(`all.html`){package list(HTML)}
     * \href(`author.pdf`){package list by author(PDF)}
-%    * \href(`author.html`){package list by author(HTML)}
+    * \href(`author.html`){package list by author(HTML)}
     * \href(`license.pdf`){package list by license(PDF)}
-%    * \href(`license.html`){package list by license(HTML)}
+    * \href(`license.html`){package list by license(HTML)}
   }
   +p{Repository: \href(`https://github.com/puripuri2100/SATySFi-package-list`){https://github.com/puripuri2100/SATySFi-package-list}}
 >

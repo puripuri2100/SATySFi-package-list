@@ -1,4 +1,4 @@
-@import: local
+@import: make
 @import: package-list
 doc {all package list}
   '<

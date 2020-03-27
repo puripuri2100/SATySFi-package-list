@@ -20,7 +20,7 @@ let list =
     (`SATySFi-language-judge`,`https://github.com/puripuri2100/SATySFi-language-judge`, None, `puripuri2100`, Some(`MIT`));
     (`SATySFi-calendar`,`https://github.com/puripuri2100/SATySFi-calendar`, None, `puripuri2100`, None);
     (`SATySFi-clock-board`,`https://github.com/puripuri2100/SATySFi-clock-board`, None, `puripuri2100`, None);
-    (`musikui.satyh`,`https://github.com/puripuri2100/musikui.satyh`, None, `puripuri2100`, Some(`MIT`));
+    (`musikui.satyh`,`https://github.com/puripuri2100/musikui.satyh`, Some(`musikui`), `puripuri2100`, Some(`MIT`));
     (`textcolor.satyh`,`https://github.com/puripuri2100/textcolor.satyh`, None, `puripuri2100`, Some(`LGPL-3.0`));
     (`satysfi-easytable`,`https://github.com/monaqa/satysfi-easytable`, Some(`easytable`), `monaqa`, Some(`MIT`));
     (`satysfi-MkTable`,`https://github.com/takagiy/satysfi-MkTable`, None, `takagiy`, Some(`MIT`));

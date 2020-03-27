@@ -1,0 +1,115 @@
+@require: make-html/stdjahtml
+@require: html-base
+@require: zrbase/zs0
+
+@require: make-html/url
+
+@import: local
+
+let doc it bt =
+  StdJaHTML.document (|
+    title = it;
+    author = {\@puripuri2100};
+    style-sheet = `main.css`;
+  |) (bt)
+
+
+let make-data-bb tinfo (name,url, satyrographos-name-opt, author, license-opt) =
+  let check-box-str =
+    match satyrographos-name-opt with
+    | None -> `☐`
+    | Some(s) -> `☑`
+  in
+  let satyrographos-name-str =
+    match satyrographos-name-opt with
+    | None -> `Satyrographos : None`
+    | Some(s) -> `Satyrographos : `# ^ s
+  in
+  let name-str =
+    name
+  in
+  let author-str =
+    `by @` ^ author
+  in
+  let url-str =
+    {URL: \url(url);} |> stringify-inline tinfo
+  in
+  let license-str =
+    match license-opt with
+    | None -> `LICENSE : None`
+    | Some(s) -> `LICENSE : `# ^ s
+  in
+  let main-bb =
+    let title-bb =
+      HTMLBase.tag ?:([(`class`,`data-title`)]) tinfo `div` (fun tinfo ->
+        name-str ^ #`    `# ^ author-str
+      )
+    in
+    let url-bb =
+      HTMLBase.tag ?:([(`class`,`data-url`)]) tinfo `div` (fun tinfo ->
+        url-str
+      )
+    in
+    let license-bb =
+      HTMLBase.tag ?:([(`class`,`data-license`)]) tinfo `div` (fun tinfo ->
+        license-str
+      )
+    in
+    let satyrographos-bb =
+      HTMLBase.tag ?:([(`class`,`data-satyrographos`)]) tinfo `div` (fun tinfo ->
+        check-box-str ^ #`   `# ^ satyrographos-name-str
+      )
+    in
+      title-bb ^ break tinfo ^
+      url-bb ^ break tinfo ^
+      license-bb ^ break tinfo ^
+      satyrographos-bb ^ break tinfo
+    in
+  main-bb
+
+
+let data-deco tinfo f data =
+  HTMLBase.tag ?:([(`class`,`data`)]) tinfo `div` (fun tinfo ->
+    f tinfo data
+  )
+
+
+let-block tinfo +make-all lst =
+  lst
+  |> List.map (data-deco tinfo make-data-bb)
+  |> ZS0.join ZS0.empty
+
+
+
+let-block tinfo +bb bb = bb
+
+
+let to-sec tinfo (title, str-lst) =
+  let main-bb =
+    str-lst |> ZS0.join ZS0.empty
+  in
+  let bt = '<+bb(main-bb);> in
+  '<+section(title |> embed-string)<#bt;>> |> stringify-block tinfo
+
+
+let to-sec-opt tinfo (title-opt, str-lst) =
+  let main-bb =
+    str-lst |> ZS0.join ZS0.empty
+  in
+  let bt = '<+bb(main-bb);> in
+  match title-opt with
+  | None -> '<+section(`None` |> embed-string)<#bt;>> |> stringify-block tinfo
+  | Some(s) -> '<+section(s |> embed-string)<#bt;>> |> stringify-block tinfo
+
+
+let-block tinfo +make-author lst =
+  lst
+  |> make-author (data-deco tinfo make-data-bb)
+  |> List.map (to-sec tinfo)
+  |> ZS0.join ZS0.empty
+
+let-block tinfo +make-license lst =
+  lst
+  |> make-license (data-deco tinfo make-data-bb)
+  |> List.map (to-sec-opt tinfo)
+  |> ZS0.join ZS0.empty

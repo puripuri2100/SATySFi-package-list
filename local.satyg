@@ -1,0 +1,74 @@
+@require: base/list-ext
+@require: base/ord
+
+
+
+let str-opt-equal o1 o2 =
+  match (o1,o2) with
+  | (None,None) -> true
+  | (Some(s1),Some(s2)) -> string-same s1 s2
+  | _ -> false
+
+
+let make-title-lst get-f eq-f lst =
+% string list -> (string,string option, string, string option) -> string list
+  let-rec sub t-lst main-lst =
+    match main-lst with
+    | [] -> t-lst
+    | x::xs ->
+      sub (
+        if List.exists (eq-f (get-f x)) t-lst then
+          t-lst
+        else
+          (get-f x) :: t-lst
+      ) xs
+  in
+  sub [] lst
+
+
+let spirit-author lst =
+  let title-lst =
+    make-title-lst (fun (_,_,_,s,_) -> s) string-same lst
+  in
+    title-lst
+    |> List.map (fun s1 ->
+        (s1,List.partition (fun (_,_,_,s2,_) -> string-same s1 s2) lst)
+      )
+    |> List.map (fun (title,(lst,_)) -> (title,lst))
+
+
+let make-author f lst =
+  let ord-lst-size =
+    Ord.make (fun (i,_,_) (j,_,_)  -> (if i == j then Eq else if i < j then Gt else Lt))
+  in
+  lst
+  |> spirit-author
+  |> List.map (fun (title,lst) -> (List.length lst, title, lst))
+  |> List.insertsort ord-lst-size
+  |> List.map (fun (_,title,lst) -> (title,lst))
+  |> List.map (fun (title,lst) -> (title,List.map f lst))
+
+
+
+let spirit-license lst =
+  let title-lst =
+    make-title-lst (fun (_,_,_,_,o) -> o) str-opt-equal lst
+  in
+    title-lst
+    |> List.map (fun o1 ->
+        (o1,List.partition (fun (_,_,_,_,o2) -> str-opt-equal o1 o2) lst)
+      )
+    |> List.map (fun (title,(lst,_)) -> (title,lst))
+
+
+let make-license f lst =
+  let ord-lst-size =
+    Ord.make (fun (i,_,_) (j,_,_) -> (if i == j then Eq else if i < j then Gt else Lt))
+  in
+  lst
+  |> spirit-license
+  |> List.map (fun (title,lst) -> (List.length lst, title, lst))
+  |> List.insertsort ord-lst-size
+  |> List.map (fun (_,title,lst) -> (title,lst))
+  |> List.map (fun (title,lst) -> (title,List.map f lst))
+
