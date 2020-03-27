@@ -4,10 +4,7 @@
 @require: vdecoset
 @require: color
 
-@require: base/list-ext
-@require: base/ord
-@require: base/int
-@require: base/string
+@import: local
 
 let doc it bt =
   StdJa.document (|
@@ -16,6 +13,7 @@ let doc it bt =
     show-title = true;
     show-toc = false;
   |) (bt)
+
 
 let make-data-bb ctx (name,url, satyrographos-name-opt, author, license-opt) =
   let check-box-ib =
@@ -83,7 +81,6 @@ let-block ctx +make-all lst =
 
 
 
-
 let-block ctx +bb bb = bb
 
 
@@ -105,75 +102,14 @@ let to-sec-opt ctx (title-opt, bb-lst) =
   | Some(s) -> '<+section(s |> embed-string)<#bt;>> |> read-block ctx
 
 
-let str-opt-equal o1 o2 =
-  match (o1,o2) with
-  | (None,None) -> true
-  | (Some(s1),Some(s2)) -> String.equal s1 s2
-  | _ -> false
-
-
-let make-title-lst get-f eq-f lst =
-% string list -> (string,string option, string, string option) -> string list
-  let-rec sub t-lst main-lst =
-    match main-lst with
-    | [] -> t-lst
-    | x::xs ->
-      sub (
-        if List.exists (eq-f (get-f x)) t-lst then
-          t-lst
-        else
-          (get-f x) :: t-lst
-      ) xs
-  in
-  sub [] lst
-
-
-let spirit-author lst =
-  let title-lst =
-    make-title-lst (fun (_,_,_,s,_) -> s) String.equal lst
-  in
-    title-lst
-    |> List.map (fun s1 ->
-        (s1,List.partition (fun (_,_,_,s2,_) -> String.equal s1 s2) lst)
-      )
-    |> List.map (fun (title,(lst,_)) -> (title,lst))
-
-
 let-block ctx +make-author lst =
-  let ord-lst-size =
-    Ord.make (fun (i,_,_) (j,_,_)  -> (if i == j then Eq else if i < j then Gt else Lt))
-  in
   lst
-  |> spirit-author
-  |> List.map (fun (title,lst) -> (List.length lst, title, lst))
-  |> List.insertsort ord-lst-size
-  |> List.map (fun (_,title,lst) -> (title,lst))
-  |> List.map (fun (title,lst) -> (title,List.map (data-deco ctx make-data-bb) lst))
+  |> make-author (data-deco ctx make-data-bb)
   |> List.map (to-sec ctx)
   |> List.fold-left (+++) block-nil
 
-
-
-let spirit-license lst =
-  let title-lst =
-    make-title-lst (fun (_,_,_,_,o) -> o) str-opt-equal lst
-  in
-    title-lst
-    |> List.map (fun o1 ->
-        (o1,List.partition (fun (_,_,_,_,o2) -> str-opt-equal o1 o2) lst)
-      )
-    |> List.map (fun (title,(lst,_)) -> (title,lst))
-
-
 let-block ctx +make-license lst =
-  let ord-lst-size =
-    Ord.make (fun (i,_,_) (j,_,_) -> (if i == j then Eq else if i < j then Gt else Lt))
-  in
   lst
-  |> spirit-license
-  |> List.map (fun (title,lst) -> (List.length lst, title, lst))
-  |> List.insertsort ord-lst-size
-  |> List.map (fun (_,title,lst) -> (title,lst))
-  |> List.map (fun (title,lst) -> (title,List.map (data-deco ctx make-data-bb) lst))
+  |> make-license (data-deco ctx make-data-bb)
   |> List.map (to-sec-opt ctx)
   |> List.fold-left (+++) block-nil

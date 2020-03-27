@@ -19,6 +19,7 @@ jobs:
           export HOME=/root
           eval $(opam env)
           opam update
+          opam install satysfi-zrbase
           opam install satysfi-base
           opam install satysfi-make-html
           opam install satysfi-fonts-noto-emoji
