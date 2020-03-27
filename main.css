@@ -26,3 +26,23 @@ code{
   font-size : 12pt;
   color : white;
 }
+
+
+.data-url{
+  margin-left: 3em;
+}
+
+.data-license{
+  margin-left: 3em;
+}
+
+.data-satyrographos{
+  margin-left: 3em;
+}
+
+.data{
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  font-weight: bold;
+  border: solid 3px #000000;
+}
