@@ -7,7 +7,7 @@ let list =
     (`satysfi-zrsatz`,`https://github.com/zr-tex8r/satysfi-zrsatz`, None, `zr-tex8r`, Some(`MIT`));
 
     (`satysfi-cancel`,`https://github.com/yuhr/satysfi-cancel`, Some(`cancel`), `yuhr`, Some(`CC0-1.0`));
-    (`SATySFi-uline`,`https://github.com/puripuri2100/SATySFi-uline`, None, `puripuri2100`, Some(`MIT`));
+    (`SATySFi-uline`,`https://github.com/puripuri2100/SATySFi-uline`, Some(`uline`), `puripuri2100`, Some(`MIT`));
     (`SATySFi-simple-itemize`,`https://github.com/puripuri2100/SATySFi-simple-itemize`, Some(`simple-itemize`), `puripuri2100`, Some(`MIT`));
     (`satysfi-enumitem`,`https://github.com/monaqa/satysfi-enumitem`, Some(`enumitem`), `monaqa`, Some(`MIT`));
     (`SATySFi-debug-show-value`,`https://github.com/puripuri2100/SATySFi-debug-show-value`, Some(`debug-show-value`), `puripuri2100`, Some(`MIT`));
